@@ -10,16 +10,16 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
 model = Sequential()
-model.add(Dense(3000, input_dim=1))  # input's dimension is one == one input node
-model.add(Dense(4000))
-model.add(Dense(2000))
+model.add(Dense(30, input_dim=1))  # input's dimension is one == one input node
+model.add(Dense(40))
+model.add(Dense(20))
 model.add(Dense(1))
 
-#3. Compile, Training
+#3. Compile, Traine
 model.compile(loss='mse', optimizer='adam')
 model.fit(x=x, y=y, epochs=500, batch_size=1)
 
-#4. evaluate, Prediction
+#4. Evaluate, Predict
 loss = model.evaluate(x,y, batch_size=1)
 results = model.predict([4])
 print("loss :", loss)
