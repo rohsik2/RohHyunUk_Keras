@@ -5,18 +5,17 @@ from sklearn.datasets import load_iris
 dataset = load_iris()
 x = dataset.data
 y = dataset.target
-print(x[:5])
-print(y[:5])
-print(x.shape, y.shape) # (150, 4) (150,)
 
-print(dataset.feature_names)
-print(dataset.DESCR) # 회귀 문제
+# One Hot Encoding
+from tensorflow.keras.utils import to_categorical
+y = to_categorical(y)
+print(y[48:52])
+print(y.shape)
 
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(
     x, y, shuffle=True, train_size=0.8, random_state=66
 )
-print(x_test[0])
 
 #2. Model
 from tensorflow.keras.models import Sequential, Model
