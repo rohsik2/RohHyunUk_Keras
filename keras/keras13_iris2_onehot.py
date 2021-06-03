@@ -9,12 +9,10 @@ y = dataset.target
 # One Hot Encoding
 from tensorflow.keras.utils import to_categorical
 y = to_categorical(y)
-print(y[48:52])
-print(y.shape)
 
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(
-    x, y, shuffle=True, train_size=0.8, random_state=66
+    x, y, shuffle=True, train_size=0.8, random_state=32
 )
 
 #2. Model
@@ -22,22 +20,25 @@ from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Input
 
 input1 = Input(shape=(4,))
-h1 = Dense(1000)(input1)
-h2 = Dense(100)(h1)
+h1 = Dense(256)(input1)
+h2 = Dense(512)(h1)
 h3 = Dense(256)(h2)
-h4 = Dense(5)(h3)
-output1 =  Dense(3, activation='softmax')(h4)
+output1 =  Dense(3, activation='softmax')(h3)
 model = Model(inputs=input1, outputs=output1)
 
 #3. Compile, Train
-model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['mae'])
-model.fit(x_train, y_train, batch_size=5, epochs=100, verbose=2)
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
+model.fit(x_train, y_train, batch_size=1, epochs=64, verbose=2)
 
 #4. Evaluate, Predict
 results = model.evaluate(x_test, y_test)
 print('results : ', results)
-
 y_predict = model.predict(x_test)
-print("input: ",x_test[:5])
-print("GT: ", y_test[:5])
-print("predict: ", y_predict[:5])
+y_predict2 = []
+for i in range(len(y_predict)):
+    y_predict2.append([])
+    for j in range(len(y_predict[i])):
+        if max(y_predict[i]) == y_predict[i][j]:
+            y_predict2[-1].append(1)
+        else:
+            y_predict2[-1].append(0)

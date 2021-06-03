@@ -23,10 +23,10 @@ from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Input
 
 input1 = Input(shape=(4,))
-h1 = Dense(1000)(input1)
-h2 = Dense(100)(h1)
+h1 = Dense(256)(input1)
+h2 = Dense(512)(h1)
 h3 = Dense(256)(h2)
-h4 = Dense(5)(h3)
+h4 = Dense(128)(h3)
 output1 =  Dense(3, activation='softmax')(h4)
 model = Model(inputs=input1, outputs=output1)
 
