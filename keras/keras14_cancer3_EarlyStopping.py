@@ -33,7 +33,10 @@ model.add(Dense(2, activation='softmax'))
 from tensorflow.keras.callbacks import EarlyStopping
 early_stopper = EarlyStopping(monitor='loss', patience=10, mode='min')
 
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
+model.compile(
+    loss='categorical_crossentropy', optimizer='adam', metrics=['acc']
+)
+
 model.fit(
     x_train, y_train, batch_size=1, epochs=64, 
     verbose=2, validation_data=(x_val,y_val),
@@ -46,13 +49,13 @@ print(model.predict(x_test[:5]))
 print(y_test[:5])
 
 # Execution Result
-# - loss: 0.2327 - acc: 0.9298       
-# [0.2327367663383484, 0.9298245906829834]   
-# [[0.03133512 0.9686649 ]
-#  [0.06499062 0.9350094 ]
-#  [0.02586474 0.9741353 ]
-#  [0.04024078 0.9597592 ]
-#  [0.10198012 0.89801985]]
+# Epochs 27, - loss: 0.3277 - acc: 0.8596
+# [0.3276708424091339, 0.859649121761322]
+# [[0.28839752 0.7116025 ]
+#  [0.12568967 0.8743103 ]
+#  [0.1839787  0.81602126]
+#  [0.35130557 0.6486944 ]
+#  [0.21510623 0.78489375]]
 # [[0. 1.]
 #  [0. 1.]
 #  [0. 1.]
