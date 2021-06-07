@@ -26,12 +26,12 @@ model.add(
         strides=1, input_shape=(28,28,1)
     )
 )
-# model.add(
-#     Conv2D(
-#         filters=256, kernel_size=(2,2), padding='same',
-#         strides=1
-#     )
-# )
+model.add(
+    Conv2D(
+        filters=16, kernel_size=(2,2), padding='same',
+        strides=1
+    )
+)
 model.add(Flatten())
 model.add(Dense(256, activation='relu'))
 model.add(Dense(128))
@@ -46,3 +46,7 @@ y_pred = model.predict(x_test)
 loss = model.evaluate(x_test,y_test)
 print('loss :', loss[0])
 print('acc  :', loss[1])
+# Execute Result
+# loss: 0.3940 - acc: 0.9718
+# loss : 0.3940015435218811
+# acc  : 0.971800029277801
