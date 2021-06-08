@@ -4,8 +4,17 @@ import numpy as np
 #1. Data
 (x_train, y_train), (x_test, y_test) = cifar100.load_data()
 
-x_train = x_train.astype('float32')/255.
-x_test = x_test.astype('float32')/255.
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.layers.experimental import preprocessing
+
+layer = preprocessing.Normalization()
+layer.adapt(x_train)
+x_train = layer(x_train)
+
+layer = preprocessing.Normalization()
+layer.adapt(x_test)
+x_test = layer(x_test)
 
 #2. Model
 from tensorflow.keras.models import Sequential
@@ -41,7 +50,7 @@ model.compile(
 )
 model.fit(
     x_train,y_train, batch_size=32, epochs=128, verbose=2,
-    validation_split=0.2, callbacks=[early_stopper]
+    validation_split=0.2
 )
 
 #4. Evaluate, Predict
@@ -58,6 +67,6 @@ print("answer  :", y_test[3])
 import matplotlib.pyplot as plt
 plt.imshow(x_test[3], 'gray')
 plt.show()
-# loss: 7.4999 - acc: 0.1628
-# loss : 7.499948501586914
-# acc  : 0.16279999911785126
+# loss: 4.4749 - acc: 0.1760
+# loss : 4.4749436378479
+# acc  : 0.17599999904632568

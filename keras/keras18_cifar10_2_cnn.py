@@ -6,7 +6,7 @@ from tensorflow.keras.datasets import cifar10
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
 x_train = x_train.reshape(50000, 32, 32, 3).astype('float32')/255.
-x_test = x_test.reshape(10000, 32, 32, 3).astype('float32')/255
+x_test = x_test.reshape(10000, 32, 32, 3).astype('float32')/255.
 
 
 from tensorflow.keras.utils import to_categorical
@@ -22,20 +22,20 @@ from tensorflow.keras.layers import Conv2D, Dense, Flatten
 model = Sequential()
 model.add(
     Conv2D(
-        filters=32, kernel_size=(2,2), padding='same',
-        strides=1, input_shape=(32,32,3)
+        filters=32, kernel_size=(2,2), strides=1,
+        padding='same', input_shape=(32,32,3)
     )
 )
 model.add(
     Conv2D(
-        filters=8, kernel_size=(2,2), padding='same',
-        strides=1
+        filters=64, kernel_size=(2,2), strides=1,
+        padding='same', input_shape=(32,32,3)
     )
 )
 model.add(Flatten())
 model.add(Dense(512, activation='relu'))
-model.add(Dense(256))
-model.add(Dense(128))
+model.add(Dense(256, activation='relu'))
+model.add(Dense(128, activation='relu'))
 model.add(Dense(10, activation='softmax'))
 
 #3. Compile, Train
