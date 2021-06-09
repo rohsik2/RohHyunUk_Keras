@@ -28,31 +28,42 @@ model = Sequential()
 
 model.add(Conv2D(32, (3, 3), padding='same',input_shape=x_train.shape[1:], activation='relu'))
 model.add(Conv2D(32, (3, 3), padding='same', activation='relu'))
+model.add(Conv2D(32, (3, 3), padding='same', activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(BatchNormalization())
+model.add(Dropout(0.2))
+
 
 model.add(Conv2D(64, (3, 3), padding='same', activation='relu'))
 model.add(Conv2D(64, (3, 3), padding='same', activation='relu'))
+model.add(Conv2D(64, (3, 3), padding='same', activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(BatchNormalization())
+model.add(Dropout(0.3))
 
 model.add(Conv2D(128, (3, 3), padding='same', activation='relu'))
 model.add(Conv2D(128, (3, 3), padding='same', activation='relu'))
+model.add(Conv2D(128, (3, 3), padding='same', activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(BatchNormalization())
+model.add(Dropout(0.3))
 
-model.add(Conv2D(256, (3, 3), padding='same', activation='relu'))
-model.add(Conv2D(256, (3, 3), padding='same', activation='relu'))
+model.add(Conv2D(256, (2, 2), padding='same', activation='relu'))
+model.add(Conv2D(256, (2, 2), padding='same', activation='relu'))
+model.add(Conv2D(256, (2, 2), padding='same', activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(BatchNormalization())
+model.add(Dropout(0.3))
+
+
 
 model.add(Flatten())
 model.add(Dense(512, activation='relu'))
-model.add(Dropout(0.5))
+model.add(Dropout(0.4))
 model.add(Dense(1024, activation='relu'))
-model.add(Dropout(0.5))
+model.add(Dropout(0.4))
 model.add(Dense(512,  activation='relu'))
-model.add(Dropout(0.5))
+model.add(Dropout(0.4))
 model.add(Dense(100, activation='softmax'))
 
 model.summary()
@@ -81,16 +92,6 @@ print("predict :", y_pred)
 print("answer  :", y_test[3])
 
 
-
-# 16conv-maxpool-dropout 16conv-average-drop 16conv-max-drop
-# loss : 2.31734037399292
-# acc  : 0.4171000123023987
-
-# 32conv 2maxpool - 64conv 2maxpool - 128conv 2maxpool - 256conv 2maxpool
-# loss : 2.2418410778045654
-# acc  : 0.43470001220703125
-
-# 32conv-2max-Batchnomaliztion 64C-2M-B 128C-2M-B 256C-2M-B
-# loss : 2.710469961166382
-# acc  : 0.34940001368522644
+# loss : 2.009660243988037
+# acc  : 0.5254999995231628
 
