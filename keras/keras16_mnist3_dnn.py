@@ -33,3 +33,7 @@ y_pred = model.predict(x_test)
 loss = model.evaluate(x_test,y_test)
 print('loss :', loss[0])
 print('acc  :', loss[1])
+
+# loss: 0.1612 - acc: 0.9788
+# loss : 0.16121423244476318
+# acc  : 0.9787999987602234

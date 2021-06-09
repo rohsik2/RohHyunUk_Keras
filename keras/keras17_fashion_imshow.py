@@ -12,5 +12,7 @@ print(y_train[0])
 # Visualization
 import matplotlib.pyplot as plt
 
+
+
 plt.imshow(x_train[0], 'gray')
 plt.show()

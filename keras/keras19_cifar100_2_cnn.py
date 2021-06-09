@@ -18,25 +18,44 @@ x_test = layer(x_test)
 
 #2. Model
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, Dense, Flatten
+from tensorflow.keras.layers import Conv2D, Dense, Flatten, Dropout, MaxPool2D, BatchNormalization, AveragePooling2D
 
 model = Sequential()
 model.add(
     Conv2D(
-        filters=128, kernel_size=(2,2), strides=1,
-        padding='same', input_shape=(32,32,3)
+        filters=16, kernel_size=(3,3), strides=1,
+        padding='same', input_shape=(32,32,3), activation='relu'
     )
 )
-model.add(
-    Conv2D(
-        filters=64, kernel_size=(2,2), strides=1,
-        padding='same', input_shape=(32,32,3)
-    )
-)
+model.add(MaxPool2D(pool_size=(2,2), strides=1, padding='same'))
+model.add(Dropout(rate=0.3))
+
+model.add(Conv2D(16, (3,3), strides=1,padding='same', activation='relu'))
+model.add(AveragePooling2D(pool_size=(2,2), strides=1, padding='same'))
+model.add(Dropout(rate=0.3))
+
+model.add(Conv2D(16, (3,3), strides=1,padding='same', activation='relu'))
+model.add(MaxPool2D(pool_size=(2,2), strides=1, padding='same'))
+model.add(Dropout(rate=0.3))
+
+model.add(Conv2D(16, (3,3), strides=1,padding='same', activation='relu'))
+model.add(AveragePooling2D(pool_size=(2,2), strides=1, padding='same'))
+model.add(Dropout(rate=0.3))
+
+
 model.add(Flatten())
-model.add(Dense(256, activation='relu'))
 model.add(Dense(512, activation='relu'))
+model.add(Dropout(rate=0.25))
+
 model.add(Dense(512, activation='relu'))
+model.add(Dropout(rate=0.25))
+
+model.add(Dense(1024, activation='relu'))
+model.add(Dropout(rate=0.25))
+
+model.add(Dense(512, activation='relu'))
+model.add(Dropout(rate=0.25))
+
 model.add(Dense(100, activation='softmax'))
 
 #3. Compile, Train

@@ -2,6 +2,7 @@ import numpy as np
 
 #1. Data
 from tensorflow.keras.datasets import cifar10
+from tensorflow.python.keras.layers.merge import Average
 
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
@@ -17,37 +18,63 @@ y_test = to_categorical(y_test)
 
 #2. Model
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, Dense, Flatten
+from tensorflow.keras.layers import Conv2D, Dense, Flatten, Dropout, MaxPool2D, BatchNormalization, AveragePooling2D
 
 model = Sequential()
 model.add(
     Conv2D(
-        filters=32, kernel_size=(2,2), strides=1,
-        padding='same', input_shape=(32,32,3)
+        filters=16, kernel_size=(3,3), strides=1,
+        padding='same', input_shape=(32,32,3), activation='relu'
     )
 )
-model.add(
-    Conv2D(
-        filters=64, kernel_size=(2,2), strides=1,
-        padding='same', input_shape=(32,32,3)
-    )
-)
+model.add(MaxPool2D(pool_size=(2,2), strides=1, padding='same'))
+model.add(Dropout(rate=0.3))
+
+model.add(Conv2D(16, (3,3), strides=1,padding='same', activation='relu'))
+model.add(AveragePooling2D(pool_size=(2,2), strides=1, padding='same'))
+model.add(Dropout(rate=0.3))
+
+model.add(Conv2D(16, (3,3), strides=1,padding='same', activation='relu'))
+model.add(MaxPool2D(pool_size=(2,2), strides=1, padding='same'))
+model.add(Dropout(rate=0.3))
+
+model.add(Conv2D(32, (3,3), strides=1,padding='same', activation='relu'))
+model.add(AveragePooling2D(pool_size=(2,2), strides=1, padding='same'))
+model.add(Dropout(rate=0.3))
+
+
+
+
 model.add(Flatten())
 model.add(Dense(512, activation='relu'))
-model.add(Dense(256, activation='relu'))
-model.add(Dense(128, activation='relu'))
+model.add(Dropout(rate=0.25))
+
+model.add(Dense(512, activation='relu'))
+model.add(Dropout(rate=0.25))
+
+model.add(Dense(1024, activation='relu'))
+model.add(Dropout(rate=0.25))
+
+model.add(Dense(512, activation='relu'))
+model.add(Dropout(rate=0.25))
+
 model.add(Dense(10, activation='softmax'))
 
 #3. Compile, Train
+from tensorflow.keras.callbacks import EarlyStopping
+early_stopper = EarlyStopping(monitor='val_loss', patience=5, mode='min')
+
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
-model.fit(x_train, y_train, epochs=32, verbose=2, validation_split=0.2, batch_size=64)
+model.fit(
+        x_train, y_train, epochs=128, callbacks=[early_stopper],
+        verbose=2, validation_split=0.2, batch_size=32
+    )
 
 #4. Evaluate, Predict
 y_pred = model.predict(x_test)
 loss = model.evaluate(x_test,y_test)
 print('loss :', loss[0])
 print('acc  :', loss[1])
-# Execute Result when batch_size=32
-# loss: 7.3356 - acc: 0.4123
-# loss : 7.3355607986450195
-# acc  : 0.4122999906539917
+# Execute Result 
+# loss : 0.901841402053833
+# acc  : 0.7052000164985657
