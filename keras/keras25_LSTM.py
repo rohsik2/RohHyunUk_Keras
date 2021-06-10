@@ -17,8 +17,3 @@ model = Sequential()
 model.add(LSTM(10, input_shape=(3, 1)))
 model.add(Dense(10))
 model.add(Dense(1))
-
-model.summary()
-#3. Compile, Train
-
-#4. Evaluate, Predict
