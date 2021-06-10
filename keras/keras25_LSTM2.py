@@ -14,14 +14,21 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
 
 model = Sequential()
-model.add(LSTM(10, input_shape=(3, 1)))
-model.add(Dense(10))
+model.add(LSTM(128, input_shape=(3, 1), activation='relu'))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(32, activation='relu'))
 model.add(Dense(1))
+
+model.summary()
 
 #3. Compile, Train
 model.compile(loss='mse', optimizer='adam')
-model.fit(x, y, batch_size=1, epochs=1000, verbose=2)
+model.fit(x, y, batch_size=1, epochs=499, verbose=0)
 
 #4. Evaluate, Predict
 print(model.evaluate(x,y))
 print(model.predict([[[5.],[6.],[7.]]]))
+
+# 0.0002326707763131708
+# [[7.977563]]
