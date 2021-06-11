@@ -44,4 +44,7 @@ x_pred = np.array([50,60,70])
 x_pred = x_pred.reshape(1,3,1)
 print(model.evaluate(x,y))
 print(model.predict(x_pred))
-
+# Execution result
+# if predict value > 75 n < 85 -> Godd Tuning
+# 1.6401337385177612
+# [[78.5485]]

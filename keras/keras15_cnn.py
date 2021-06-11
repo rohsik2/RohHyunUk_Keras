@@ -24,7 +24,6 @@ model.add(Flatten())
 model.add(Dense(1))
 model.summary()
 
-
 #3. Comile, Train
 
 #4. Evaluate, Predict

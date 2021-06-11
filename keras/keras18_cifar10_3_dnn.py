@@ -34,6 +34,6 @@ loss = model.evaluate(x_test,y_test)
 print('loss :', loss[0])
 print('acc  :', loss[1])
 
-# loss: 0.2059 - acc: 0.9767
-# loss : 0.20589445531368256
-# acc  : 0.9767000079154968
+# loss: 1.6036 - acc: 0.4290
+# loss : 1.6036491394042969
+# acc  : 0.42899999022483826

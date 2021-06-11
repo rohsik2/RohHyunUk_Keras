@@ -30,7 +30,8 @@ model.add(Dense(2, activation='softmax'))
 
 #3. Compile, Train
 model.compile(loss='categorical_crossentropy', optimizer='adam',
-                     metrics=['acc'])
+                    metrics=['acc'])
+
 cnt = 0
 best_fit = 0
 while(True):
@@ -43,6 +44,7 @@ while(True):
         cnt += 1
     if cnt > 5:
         break
+
 #4. Evaluate, Predict
 print(model.evaluate(x_test,y_test))
 print(model.predict(x_test[:5]))

@@ -22,7 +22,7 @@ from tensorflow.keras.layers import Conv2D, Dense, Flatten
 model = Sequential()
 model.add(
     Conv2D(
-        filters=16, kernel_size=(2,2), padding='same',
+        filters=32, kernel_size=(2,2), padding='same',
         strides=1, input_shape=(28,28,1)
     )
 )
