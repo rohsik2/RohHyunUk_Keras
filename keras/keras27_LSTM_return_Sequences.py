@@ -7,11 +7,11 @@ x = np.array([
         [1, 2, 3], [2, 3, 4], [3, 4, 5], 
         [4, 5, 6], [5, 6, 7], [6, 7, 8], 
         [7, 8, 9], [8, 9, 10], [9, 10, 11], 
-        [10, 11, 12], [20,30,40], [30,40,50], 
-        [40,50,60]
+        [10, 11, 12], [20, 30, 40], [30,40,50],
+        [40, 50, 60]
     ])
 y = np.array([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 50, 60, 70])
-x = x.reshape(13,3,1)
+x = x.reshape(13, 3, 1)
 
 print(x.shape, y.shape)
 
@@ -42,6 +42,6 @@ x_pred = x_pred.reshape(1,3,1)
 print(model.evaluate(x,y))
 print(model.predict(x_pred))
 # Execution result
-# if predict value > 75 n < 85 -> Godd Tuning
+# if predict value > 75 n < 85 -> Good Tuning
 # 1.6401337385177612
 # [[78.5485]]
