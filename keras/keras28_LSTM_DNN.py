@@ -15,12 +15,12 @@ y = np.array([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 50, 60, 70])
 
 #2. Model
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dense, LSTM
 
 model = Sequential()
-# model.add(LSTM(32, input_shape=(3, 1), activation='relu', return_sequences=True))
-# model.add(LSTM(32, input_shape=(3, 1), activation='relu'))
-model.add(Dense(64, activation='relu', input_shape=(3,)))
+model.add(LSTM(32, input_shape=(3, 1), activation='relu', return_sequences=True))
+model.add(LSTM(32, input_shape=(3, 1), activation='relu'))
+model.add(Dense(64, activation='relu'))
 model.add(Dense(64, activation='relu'))
 model.add(Dense(32, activation='relu'))
 model.add(Dense(16, activation='relu'))
