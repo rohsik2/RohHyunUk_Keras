@@ -30,7 +30,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Embedding, LSTM, Flatten, Conv1D
 
 model = Sequential()
-model.add(Embedding(input_dim=28, output_dim=7, input_length=5))
+# model.add(Embedding(input_dim=28, output_dim=7, input_length=5))
+model.add(Embedding(128, 7))
 model.add(LSTM(32))
 model.add(Dense(128, activation='relu'))
 model.add(Dense(64, activation='relu'))
