@@ -1,8 +1,8 @@
-from tensorflow.keras.datasets import mnist
+from tensorflow.keras.datasets import cifar100
 import numpy as np
 
 #1. Data
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = cifar100.load_data()
 
 import numpy as np
 import tensorflow as tf
@@ -16,8 +16,8 @@ layer = preprocessing.Normalization()
 layer.adapt(x_test)
 x_test = layer(x_test)
 '''
-x_train = x_train.reshape(60000,28,28,1).astype('float32')/255.
-x_test = x_test.reshape(10000,28,28,1).astype('float32')/255.
+x_train = x_train.astype('float32')/255.
+x_test = x_test.astype('float32')/255.
 
 #2. Model
 from tensorflow.keras import regularizers

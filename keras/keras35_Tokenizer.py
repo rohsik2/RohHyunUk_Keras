@@ -16,4 +16,5 @@ word_size = len(token.word_index)
 print(word_size)
 x = to_categorical(x)
 print(x)
-print(x.shape)
+print(x.shape) # to_categorical starts with 0 but this token statrts with 1
+               # so shape is not (6,5) but (6,6)

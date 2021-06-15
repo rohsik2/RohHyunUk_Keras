@@ -43,5 +43,5 @@ print(model.evaluate(x,y))
 print(model.predict(x_pred))
 # Execution result
 # if predict value > 75 n < 85 -> Good Tuning
-# 1.6401337385177612
-# [[78.5485]]
+# 0.308273583650589
+# [[79.47302]]

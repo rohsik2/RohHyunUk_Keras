@@ -89,7 +89,7 @@ model.add(Dense(1, activation='sigmoid'))
 
 #3. Compile, Train
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['acc'])
-model.fit_generator(xy_train, steps_per_epoch=206, epochs=32, verbose=2, validation_data=xy_test)
+model.fit_generator(xy_train, steps_per_epoch=206, epochs=64, verbose=2, validation_data=xy_test)
 #4. Evaluate, Predict
 results = model.evaluate_generator(xy_test)
 print(results)
